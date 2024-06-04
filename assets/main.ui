@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>524</width>
+    <width>630</width>
     <height>773</height>
    </rect>
   </property>
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>501</width>
-      <height>131</height>
+      <y>0</y>
+      <width>611</width>
+      <height>371</height>
      </rect>
     </property>
     <property name="font">
@@ -40,7 +40,7 @@
     <property name="title">
      <string>Category-Sort</string>
     </property>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="deptcomboBox">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -58,11 +58,6 @@
        <bold>false</bold>
       </font>
      </property>
-     <item>
-      <property name="text">
-       <string>All</string>
-      </property>
-     </item>
     </widget>
     <widget class="QLabel" name="label">
      <property name="geometry">
@@ -85,6 +80,211 @@
       <string>Department</string>
      </property>
     </widget>
+    <widget class="QTabWidget" name="maleFemaleTab">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>591</width>
+       <height>191</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="maleTab">
+      <attribute name="title">
+       <string>Male</string>
+      </attribute>
+      <widget class="QTableWidget" name="maleValueTable">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>581</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Book Antiqua</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTableWidget {
+    border: 2px solid black;
+}</string>
+       </property>
+       <row>
+        <property name="text">
+         <string>Hindu</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>Christian</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>Muslim</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>OC</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>SC</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>ST</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>MBC/ONC/BC</string>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="1" column="3">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+       </item>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="femaleTab">
+      <attribute name="title">
+       <string>Female</string>
+      </attribute>
+      <widget class="QTableWidget" name="femaleValueTable">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>581</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Book Antiqua</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTableWidget {
+    border: 2px solid black;
+}</string>
+       </property>
+       <row>
+        <property name="text">
+         <string>Hindu</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>Christian</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>Muslim</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>OC</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>SC</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>ST</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>MBC/ONC/BC</string>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="1" column="3">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+       </item>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="categoryExportAll">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>290</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Export All</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="categoryExport">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>290</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Export</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -92,7 +292,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>524</width>
+     <width>630</width>
      <height>26</height>
     </rect>
    </property>

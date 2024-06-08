@@ -88,38 +88,20 @@ class Database:
     
     
     def update_table(self, dept, maleTable:QTableWidget, femaleTable:QTableWidget):
-        # Male Hindu
-        maleTable.setItem(0, 0, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.hindu.oc)))
-        maleTable.setItem(0, 1, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.hindu.sc)))
-        maleTable.setItem(0, 2, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.hindu.st)))
-        maleTable.setItem(0, 3, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.hindu.others)))
+        # Male
+        hindu = self.category_sort.department.departments[dept].male.hindu.exportCaste()
+        christian = self.category_sort.department.departments[dept].male.christian.exportCaste()
+        muslim = self.category_sort.department.departments[dept].male.muslim.exportCaste()
 
-        # Male Christian
-        maleTable.setItem(1, 0, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.christian.oc)))
-        maleTable.setItem(1, 1, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.christian.sc)))
-        maleTable.setItem(1, 2, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.christian.st)))
-        maleTable.setItem(1, 3, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.christian.others)))
+        for x , religion in enumerate([hindu, christian, muslim]):
+            for y, value in enumerate(religion):
+                maleTable.setItem(x, y, QTableWidgetItem(str(value)))
 
-        # Male Muslim
-        maleTable.setItem(2, 0, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.muslim.oc)))
-        maleTable.setItem(2, 1, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.muslim.sc)))
-        maleTable.setItem(2, 2, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.muslim.st)))
-        maleTable.setItem(2, 3, QTableWidgetItem(str(self.category_sort.department.departments[dept].male.muslim.others)))
+        # Female
+        hindu = self.category_sort.department.departments[dept].female.hindu.exportCaste()
+        christian = self.category_sort.department.departments[dept].female.christian.exportCaste()
+        muslim = self.category_sort.department.departments[dept].female.muslim.exportCaste()
 
-        # Female Hindu
-        femaleTable.setItem(0, 0, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.hindu.oc)))
-        femaleTable.setItem(0, 1, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.hindu.sc)))
-        femaleTable.setItem(0, 2, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.hindu.st)))
-        femaleTable.setItem(0, 3, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.hindu.others)))
-
-        # Female Christian
-        femaleTable.setItem(1, 0, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.christian.oc)))
-        femaleTable.setItem(1, 1, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.christian.sc)))
-        femaleTable.setItem(1, 2, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.christian.st)))
-        femaleTable.setItem(1, 3, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.christian.others)))
-
-        # Female Muslim
-        femaleTable.setItem(2, 0, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.muslim.oc)))
-        femaleTable.setItem(2, 1, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.muslim.sc)))
-        femaleTable.setItem(2, 2, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.muslim.st)))
-        femaleTable.setItem(2, 3, QTableWidgetItem(str(self.category_sort.department.departments[dept].female.muslim.others)))
+        for x , religion in enumerate([hindu, christian, muslim]):
+            for y, value in enumerate(religion):
+                femaleTable.setItem(x, y, QTableWidgetItem(str(value)))

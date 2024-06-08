@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>773</height>
+    <height>799</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,6 +94,16 @@
        <family>Cambria</family>
        <pointsize>11</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTabBar::tab:hover { 
+    background: #D6D6D6; 
+    color: #000; 
+}
+
+QTabBar::tab:selected { 
+    background: #FFFFFF;  
+}</string>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -283,6 +293,194 @@
      </property>
      <property name="text">
       <string>Export</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="awardedSortGroupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>611</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Book Antiqua</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">GroupBox {
+	font: 75 11pt &quot;Book Antiqua&quot;;
+}</string>
+    </property>
+    <property name="title">
+     <string>Awarded-Sort</string>
+    </property>
+    <widget class="QComboBox" name="awardedDeptComboBox">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>40</y>
+       <width>251</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Department</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="awardedValueTable">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>591</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Book Antiqua</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTableWidget {
+    border: 2px solid black;
+}</string>
+     </property>
+     <row>
+      <property name="text">
+       <string>Male</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Female</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>Part-Time</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Full-Time</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QComboBox" name="startYearComboBox">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="year">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Starting Year</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="endYearComboBox">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="year_2">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Ending Year</string>
      </property>
     </widget>
    </widget>

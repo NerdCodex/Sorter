@@ -1,18 +1,21 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QFont, QPixmap
+from PyQt5.QtCore import Qt, QTimer
 from pgms.indexLayout import Ui_MainWindow
 from pgms.database import Database
 from pgms.export import CatagoryExporter
 from docx import Document
-import pandas as pd
-import sys
+import sys, time
 
 
 class MyApp(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MyApp, self).__init__()
         self.setupUi(self)
+
+        self.setWindowIcon(QIcon("assets\\icon.ico"))
         
         # Config
         self.setQTableWidgetConfig()
@@ -166,8 +169,22 @@ class MyApp(QMainWindow, Ui_MainWindow):
             table_file.insert_data(self.database.femaleCategoryDataExporter(current_sheet_name, 1), female_table)
             document.save(filename)
 
+class SplashScreen(QSplashScreen):
+    def __init__(self, pixmap):
+        super(SplashScreen, self).__init__(pixmap)
+        self.setFont(QFont("Arial", 20, QFont.Light))
+        self.showMessage("Loading...", Qt.AlignBottom | Qt.AlignHCenter, Qt.white)
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    img = QPixmap("assets\\splash.png")
+    splash = SplashScreen(img)
+    screen_rect = app.desktop().screenGeometry()
+    splash.move((screen_rect.width() - splash.width()) // 2, (screen_rect.height() - splash.height()) // 2)
+    splash.show()
+    loading = QTimer()
+    loading.singleShot(7000, splash.close)
+    time.sleep(5)
     win = MyApp()
     win.show()
     app.exec()

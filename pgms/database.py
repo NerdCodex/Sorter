@@ -14,6 +14,9 @@ class Caste:
         self.st = len(content.query('Caste == "ST"').to_numpy().tolist())
         self.others = len(content.query('Caste == "BC"').to_numpy().tolist())
     
+    def exportCaste(self):
+        return [self.oc, self.sc, self.st, self.others]
+    
 class Religion:
     def __init__(self):
         self.hindu = Caste()
@@ -57,6 +60,32 @@ class Database:
     def __init__(self, filename:str):
         self.file_content = pd.ExcelFile(filename)
         self.category_sort = CategorySort(self.file_content)
+
+    def maleDataExporter(self, sheet_name, index):
+
+        hindu = [index, sheet_name, "Hindu"]
+        christian = [index, sheet_name, "Christian"]
+        muslim = [index, sheet_name, "Muslim"]
+
+        hindu.extend(self.category_sort.department.departments[sheet_name].male.hindu.exportCaste())
+        christian.extend(self.category_sort.department.departments[sheet_name].male.christian.exportCaste())
+        muslim.extend(self.category_sort.department.departments[sheet_name].male.muslim.exportCaste())
+
+        return [hindu, christian, muslim]
+    
+    def femaleDataExporter(self, sheet_name, index):
+
+        hindu = [index, sheet_name, "Hindu"]
+        christian = [index, sheet_name, "Christian"]
+        muslim = [index, sheet_name, "Muslim"]
+
+        hindu.extend(self.category_sort.department.departments[sheet_name].female.hindu.exportCaste())
+        christian.extend(self.category_sort.department.departments[sheet_name].female.christian.exportCaste())
+        muslim.extend(self.category_sort.department.departments[sheet_name].female.muslim.exportCaste())
+
+        return [hindu, christian, muslim]
+
+    
     
     def update_table(self, dept, maleTable:QTableWidget, femaleTable:QTableWidget):
         # Male Hindu

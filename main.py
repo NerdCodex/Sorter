@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
 from pgms.indexLayout import Ui_MainWindow
 from pgms.database import Database
+from pgms.export import CatagoryExporter
+from docx import Document
 import pandas as pd
 import sys
 
@@ -20,6 +22,8 @@ class MyApp(QMainWindow, Ui_MainWindow):
         # Triggers
         self.fileLoad.triggered.connect(self.loadfile)
         self.deptcomboBox.currentTextChanged.connect(self.comboBoxChanged)
+        self.categoryExportAll.clicked.connect(self.exportall)
+        self.categoryExport.clicked.connect(self.export)
     
     def loadfile(self):
         options = QFileDialog.Options()
@@ -27,6 +31,7 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
         if self.filename.endswith(".xlsx"):
             self.database = Database(self.filename)
+            self.sheet_names = self.database.file_content.sheet_names
             self.update_combo_box(self.database.file_content.sheet_names)
         else:
             self.show_warning_message_box("You Have Opened an Unknow file with Unknown sheets")
@@ -60,6 +65,46 @@ class MyApp(QMainWindow, Ui_MainWindow):
         warning_box.setText(msg)
         warning_box.setStandardButtons(QMessageBox.Ok)
         warning_box.exec_()
+    
+    # Export Functions
+    def exportall(self):
+        options = QFileDialog.Options()
+        filename, _ = QFileDialog.getSaveFileName(self, "Save Data", "", "Word Files (*.docx);;All Files (*)", options=options)
+        if filename:
+            document = Document()
+            table_file = CatagoryExporter(document)
+            
+            table_file.add_heading("Male")
+            male_table = table_file.create_table()
+            for index, sheet in enumerate(self.sheet_names):
+                table_file.insert_data(self.database.maleDataExporter(sheet, index+1), male_table)
+            
+            table_file.add_heading("\nFemale")
+            female_table = table_file.create_table()
+            for index, sheet in enumerate(self.sheet_names):
+                table_file.insert_data(self.database.femaleDataExporter(sheet, index+1), female_table)
+            document.save(filename)
+        
+    def export(self):
+        current_sheet_name = self.deptcomboBox.currentText()
+        options = QFileDialog.Options()
+        filename, _ = QFileDialog.getSaveFileName(self, "Save Data", "", "Word Files (*.docx);;All Files (*)", options=options)
+        if filename:
+            document = Document()
+            table_file = CatagoryExporter(document)
+
+            table_file.add_heading("Male")
+            male_table = table_file.create_table()
+            table_file.insert_data(self.database.maleDataExporter(current_sheet_name, 1), male_table)
+
+            table_file.add_heading("\nFemale")
+            female_table = table_file.create_table()
+            table_file.insert_data(self.database.femaleDataExporter(current_sheet_name, 1), female_table)
+            document.save(filename)
+            
+        
+
+            
 
 
 if __name__ == "__main__":

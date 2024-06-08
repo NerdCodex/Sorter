@@ -27,6 +27,14 @@ class AwardedGender:
     def loadGender(self, content):
         self.male.loadTime(content.query('Gender == "Male"'))
         self.female.loadTime(content.query('Gender == "Female"'))
+    
+    def genderExport(self):
+        male = self.male.getTime()
+        female = self.female.getTime()
+        total = male[0] + male[1] + female[1] + female[0]
+        male.append(total)
+        female.append(total)
+        return [male, female]
 
 class AwardedYear:
     def __init__(self, years):
@@ -159,6 +167,18 @@ class Database:
         muslim.extend(religion[2])
 
         return [hindu, christian, muslim]
+    
+    def awardedExporter(self, sheet_name, year, index):
+        male = [index, year, "Male"]
+        female = [index, year, "Female"]
+
+        Genders = self.awarded_sort.awardedList.departments[sheet_name].years[year].genderExport()
+
+        male.extend(Genders[0])
+        female.extend(Genders[1])
+        
+        return [male, female]
+        
     
     def update_male_female_table(self, dept, maleTable:QTableWidget, femaleTable:QTableWidget):
         # Male

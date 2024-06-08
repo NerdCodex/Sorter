@@ -1,11 +1,11 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
-from PyQt5.QtGui import QFont, QPixmap
+from PyQt5.QtGui import QFont, QPixmap,QPainter, QColor, QBrush
 from PyQt5.QtCore import Qt, QTimer
 from pgms.indexLayout import Ui_MainWindow
 from pgms.database import Database
-from pgms.export import CatagoryExporter
+from pgms.export import CatagoryExporter, AwardedExporter
 from docx import Document
 import sys, time
 
@@ -19,8 +19,10 @@ class MyApp(QMainWindow, Ui_MainWindow):
         
         # Config
         self.setQTableWidgetConfig()
-        self.categoryExportAll.setIcon(QIcon("assets\\word.png"))
-        self.categoryExport.setIcon(QIcon("assets\\word.png"))
+        self.categoryExportAllBtn.setIcon(QIcon("assets\\word.png"))
+        self.categoryExportBtn.setIcon(QIcon("assets\\word.png"))
+        self.awardedExportAllBtn.setIcon(QIcon("assets\\word.png"))
+        self.awardedExportBtn.setIcon(QIcon("assets\\word.png"))
 
         # Triggers
         self.fileLoad.triggered.connect(self.loadfile)
@@ -28,8 +30,10 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.awardedDeptComboBox.currentTextChanged.connect(self.awardedComboBoxChanged)
         self.startYearComboBox.currentTextChanged.connect(self.startYearComboBoxChanged)
         self.endYearComboBox.currentTextChanged.connect(self.endYearComboBoxChanged)
-        self.categoryExportAll.clicked.connect(self.exportall)
-        self.categoryExport.clicked.connect(self.export)
+        self.categoryExportAllBtn.clicked.connect(self.categoryExportAll)
+        self.categoryExportBtn.clicked.connect(self.categoryExport)
+        self.awardedExportBtn.clicked.connect(self.awardedExport)
+        self.awardedExportAllBtn.clicked.connect(self.awardedExportAll)
     
     def loadfile(self):
         options = QFileDialog.Options()
@@ -54,7 +58,6 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.awardedDeptComboBox.currentTextChanged.connect(self.awardedComboBoxChanged)
         self.startYearComboBox.currentTextChanged.connect(self.startYearComboBoxChanged)
         self.endYearComboBox.currentTextChanged.connect(self.endYearComboBoxChanged)
-
 
     def update_combo_box(self, sheets):
         self.deptcomboBox.clear()
@@ -134,7 +137,7 @@ class MyApp(QMainWindow, Ui_MainWindow):
         warning_box.exec_()
     
     # Export Functions
-    def exportall(self):
+    def categoryExportAll(self):
         options = QFileDialog.Options()
         filename, _ = QFileDialog.getSaveFileName(self, "Save Data", "", "Word Files (*.docx);;All Files (*)", options=options)
         if filename:
@@ -152,7 +155,7 @@ class MyApp(QMainWindow, Ui_MainWindow):
                 table_file.insert_data(self.database.femaleCategoryDataExporter(sheet, index+1), female_table)
             document.save(filename)
         
-    def export(self):
+    def categoryExport(self):
         current_sheet_name = self.deptcomboBox.currentText()
         options = QFileDialog.Options()
         filename, _ = QFileDialog.getSaveFileName(self, "Save Data", "", "Word Files (*.docx);;All Files (*)", options=options)
@@ -168,12 +171,90 @@ class MyApp(QMainWindow, Ui_MainWindow):
             female_table = table_file.create_table()
             table_file.insert_data(self.database.femaleCategoryDataExporter(current_sheet_name, 1), female_table)
             document.save(filename)
+    
+    def awardedExport(self):
+        options = QFileDialog.Options()
+        filename, _ = QFileDialog.getSaveFileName(self, "Save Data", "", "Word Files (*.docx);;All Files (*)", options=options)
+        if filename:
+            document = Document()
+            table_file = AwardedExporter(document)
+
+            current_sheet = self.awardedDeptComboBox.currentText()
+            start_year = int(self.startYearComboBox.currentText())
+            end_year = int(self.endYearComboBox.currentText())
+            years = self.database.awarded_sort.awardedList.departments[current_sheet].years_list
+
+            table_file.add_heading(current_sheet)
+            current_table = table_file.create_table()
+            
+            serial_num = 1
+
+            try:
+                for year in range(start_year, end_year+1):
+                    if year in years:
+                        data = self.database.awardedExporter(current_sheet, year, serial_num)
+                        serial_num+=1
+                        table_file.insert_data(data, current_table)
+            except KeyError:
+                exit(1)
+            document.save(filename)
+    
+    def awardedExportAll(self):
+        options = QFileDialog.Options()
+        filename, _ = QFileDialog.getSaveFileName(self, "Save Data", "", "Word Files (*.docx);;All Files (*)", options=options)
+        if filename:
+            document = Document()
+            table_file = AwardedExporter(document)
+            
+            
+            for sheet in self.sheet_names:
+                table_file.add_heading(sheet)
+                current_table = table_file.create_table()
+                years = self.database.awarded_sort.awardedList.departments[sheet].years_list
+                try:
+                    for index, year in enumerate(years):
+                            data = self.database.awardedExporter(sheet, year, index+1)
+                            table_file.insert_data(data, current_table)
+                except KeyError:
+                    exit(1)
+        document.save(filename)
 
 class SplashScreen(QSplashScreen):
     def __init__(self, pixmap):
         super(SplashScreen, self).__init__(pixmap)
         self.setFont(QFont("Arial", 20, QFont.Light))
-        self.showMessage("Loading...", Qt.AlignBottom | Qt.AlignHCenter, Qt.white)
+        self.text = "Loading..."
+        self.text_color = Qt.black
+        self.background_color = Qt.white  # Change this to the desired background color
+        self.alignment = Qt.AlignBottom | Qt.AlignHCenter
+
+    def showMessage(self, text, alignment, color):
+        self.text = text
+        self.alignment = alignment
+        self.text_color = color
+        self.repaint()
+
+    def paintEvent(self, event):
+        super(SplashScreen, self).paintEvent(event)
+        painter = QPainter(self)
+        painter.setFont(self.font())
+        
+        # Measure the text size
+        text_rect = painter.boundingRect(self.rect(), self.alignment, self.text)
+        
+        # Set the background color
+        painter.setBrush(QBrush(self.background_color))
+        painter.setPen(Qt.NoPen)
+        
+        # Draw the background rectangle
+        painter.drawRect(text_rect)
+        
+        # Set the text color
+        painter.setPen(self.text_color)
+        
+        # Draw the text
+        painter.drawText(self.rect(), self.alignment, self.text)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -184,7 +265,7 @@ if __name__ == "__main__":
     splash.show()
     loading = QTimer()
     loading.singleShot(7000, splash.close)
-    time.sleep(5)
+    time.sleep(3)
     win = MyApp()
     win.show()
     app.exec()

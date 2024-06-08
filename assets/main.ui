@@ -275,7 +275,7 @@ QTabBar::tab:selected {
       </widget>
      </widget>
     </widget>
-    <widget class="QPushButton" name="categoryExportAll">
+    <widget class="QPushButton" name="categoryExportBtn">
      <property name="geometry">
       <rect>
        <x>90</x>
@@ -288,10 +288,10 @@ QTabBar::tab:selected {
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>Export All</string>
+      <string>Export</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="categoryExport">
+    <widget class="QPushButton" name="categoryExportAllBtn">
      <property name="geometry">
       <rect>
        <x>340</x>
@@ -304,7 +304,7 @@ QTabBar::tab:selected {
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>Export</string>
+      <string>Export All</string>
      </property>
     </widget>
    </widget>
@@ -493,6 +493,38 @@ QTabBar::tab:selected {
      </property>
      <property name="text">
       <string>Ending Year</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="awardedExportBtn">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>310</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Export</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="awardedExportAllBtn">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>310</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Export All</string>
      </property>
     </widget>
    </widget>

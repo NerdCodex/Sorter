@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>800</height>
+    <height>688</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>630</width>
-    <height>800</height>
+    <height>688</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>630</width>
-    <height>800</height>
+    <height>688</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
       <x>10</x>
       <y>0</y>
       <width>611</width>
-      <height>371</height>
+      <height>311</height>
      </rect>
     </property>
     <property name="font">
@@ -98,7 +98,7 @@
        <x>10</x>
        <y>80</y>
        <width>591</width>
-       <height>191</height>
+       <height>171</height>
       </rect>
      </property>
      <property name="font">
@@ -130,7 +130,7 @@ QTabBar::tab:selected {
          <x>0</x>
          <y>0</y>
          <width>581</width>
-         <height>151</height>
+         <height>131</height>
         </rect>
        </property>
        <property name="font">
@@ -278,8 +278,8 @@ QTabBar::tab:selected {
     <widget class="QPushButton" name="categoryExportBtn">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>290</y>
+       <x>80</x>
+       <y>260</y>
        <width>151</width>
        <height>41</height>
       </rect>
@@ -294,8 +294,8 @@ QTabBar::tab:selected {
     <widget class="QPushButton" name="categoryExportAllBtn">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>290</y>
+       <x>330</x>
+       <y>260</y>
        <width>151</width>
        <height>41</height>
       </rect>
@@ -312,9 +312,9 @@ QTabBar::tab:selected {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>370</y>
+      <y>310</y>
       <width>611</width>
-      <height>371</height>
+      <height>321</height>
      </rect>
     </property>
     <property name="font">
@@ -380,7 +380,7 @@ QTabBar::tab:selected {
        <x>10</x>
        <y>140</y>
        <width>591</width>
-       <height>151</height>
+       <height>111</height>
       </rect>
      </property>
      <property name="font">
@@ -498,8 +498,8 @@ QTabBar::tab:selected {
     <widget class="QPushButton" name="awardedExportBtn">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>310</y>
+       <x>70</x>
+       <y>270</y>
        <width>151</width>
        <height>41</height>
       </rect>
@@ -514,8 +514,8 @@ QTabBar::tab:selected {
     <widget class="QPushButton" name="awardedExportAllBtn">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>310</y>
+       <x>320</x>
+       <y>270</y>
        <width>151</width>
        <height>41</height>
       </rect>

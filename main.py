@@ -264,7 +264,7 @@ if __name__ == "__main__":
     splash.move((screen_rect.width() - splash.width()) // 2, (screen_rect.height() - splash.height()) // 2)
     splash.show()
     loading = QTimer()
-    loading.singleShot(7000, splash.close)
+    loading.singleShot(5000, splash.close)
     time.sleep(3)
     win = MyApp()
     win.show()

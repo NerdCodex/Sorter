@@ -44,9 +44,9 @@ class AwardedYear:
             self.years[year] = AwardedGender()
     
     def loadAwardedYear(self, content):
-        content['Commencement Date'] = pd.to_datetime(content['Commencement Date'])
+        content['Viva Date'] = pd.to_datetime(content['Viva Date'])
         for year in self.years_list:
-            self.years[year].loadGender(content.query(f'Status == "Awarded" and `Commencement Date`.dt.year == {year}'))
+            self.years[year].loadGender(content.query(f'Status == "Awarded" and `Viva Date`.dt.year == {year}'))
 
 class AwardedDepartment:
     def __init__(self, sheets, content):
@@ -54,7 +54,7 @@ class AwardedDepartment:
         self.content = content
         self.sheets = sheets
         for sheet in sheets:
-            year = self.getYears(self.content.parse(sheet)["Commencement Date"].to_list())
+            year = self.getYears(self.content.parse(sheet)["Viva Date"].to_list())
             self.departments[sheet] = AwardedYear(year)
         self.loadDepartment()
     
